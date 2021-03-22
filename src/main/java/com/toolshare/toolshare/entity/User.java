@@ -1,5 +1,8 @@
 package com.toolshare.toolshare.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -31,6 +34,15 @@ public class User {
 	@NotBlank
 	@Size(max = 120)
 	private String password;
+
+	@DateTimeFormat(pattern = "dd/mm/yyyy")
+	private Date birthday;
+
+	@Size(max=50)
+	private String telnr;
+
+	@Size(max=50)
+	private String standort;
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(	name = "user_roles", 
@@ -77,6 +89,30 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+
+	public String getTelnr() {
+		return telnr;
+	}
+
+	public void setTelnr(String telnr) {
+		this.telnr = telnr;
+	}
+
+	public String getStandort() {
+		return standort;
+	}
+
+	public void setStandort(String standort) {
+		this.standort = standort;
 	}
 
 	public Set<Role> getRoles() {
