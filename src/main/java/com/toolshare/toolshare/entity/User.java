@@ -1,67 +1,125 @@
 package com.toolshare.toolshare.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.*;
-import java.io.Serializable;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "user")
-public class User implements Serializable {
+@Table(	name = "users", 
+		uniqueConstraints = { 
+			@UniqueConstraint(columnNames = "username"),
+			@UniqueConstraint(columnNames = "email") 
+		})
+public class User {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-    private String name;
-    private String last_name;
-    private int age;
+	@NotBlank
+	@Size(max = 20)
+	private String username;
 
-    public User() {
-    }
+	@NotBlank
+	@Size(max = 50)
+	@Email
+	private String email;
 
-    public User(String name, String last_name, int age) {
-        this.name = name;
-        this.last_name = last_name;
-        this.age = age;
-    }
+	@NotBlank
+	@Size(max = 120)
+	private String password;
 
-    public Integer getId() {
-        return id;
-    }
+	@DateTimeFormat(pattern = "dd/mm/yyyy")
+	private Date birthday;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	@Size(max=50)
+	private String telnr;
 
-    public String getName() {
-        return name;
-    }
+	@Size(max=50)
+	private String standort;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(	name = "user_roles", 
+				joinColumns = @JoinColumn(name = "user_id"), 
+				inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private Set<Role> roles = new HashSet<>();
 
-    public String getLastName() {
-        return last_name;
-    }
+	public User() {
+	}
 
-    public void setLastName(String last_name) {
-        this.last_name = last_name;
-    }
+	public User(String username, String email, String password) {
+		this.username = username;
+		this.email = email;
+		this.password = password;
+	}
 
-    public int getAge() {
-        return age;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setAge(int age) {
-        this.age = age;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    @Override
-    public String toString() {
-        return "User{" +
-                ", id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", last_name='" + last_name + '\'' +
-                ", Age=" + age +
-                '}';
-    }
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+
+	public String getTelnr() {
+		return telnr;
+	}
+
+	public void setTelnr(String telnr) {
+		this.telnr = telnr;
+	}
+
+	public String getStandort() {
+		return standort;
+	}
+
+	public void setStandort(String standort) {
+		this.standort = standort;
+	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
 }
