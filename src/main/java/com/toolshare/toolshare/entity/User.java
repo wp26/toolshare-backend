@@ -17,6 +17,7 @@ import javax.validation.constraints.Size;
 			@UniqueConstraint(columnNames = "username"),
 			@UniqueConstraint(columnNames = "email") 
 		})
+
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -121,5 +122,18 @@ public class User {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+
+	@Override
+	public String toString() {
+		return "User{" +
+				", id='" + id + '\'' +
+				", username='" + username + '\'' +
+				", email='" + email + '\'' +
+				", birthday=" + birthday +
+				", telnr=" + telnr +
+				", standort=" + standort +
+				", roles=" + roles +
+				'}';
 	}
 }
