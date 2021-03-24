@@ -37,6 +37,8 @@ public class Tool implements Serializable {
     @Column(name="is_available")
     private boolean isAvailable;
 
+    public Tool () { }
+
     public Tool (String name, String category, String description) {
         this.name = name;
         this.category = category;
