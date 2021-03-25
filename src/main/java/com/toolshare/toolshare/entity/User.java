@@ -130,10 +130,10 @@ public class User {
 				", id='" + id + '\'' +
 				", username='" + username + '\'' +
 				", email='" + email + '\'' +
-				", birthday=" + birthday +
-				", telnr=" + telnr +
-				", standort=" + standort +
-				", roles=" + roles +
+				", birthday=" + birthday + '\'' +
+				", telnr=" + telnr + '\'' +
+				", standort=" + standort + '\'' +
+				", roles=" + roles + '\'' +
 				'}';
 	}
 }
