@@ -3,6 +3,8 @@ package com.toolshare.toolshare.entity;
 import org.springframework.hateoas.Link;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 /**
@@ -16,13 +18,33 @@ public class Tool implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
     private Link user_id;
+
+    @NotBlank
+    @Size(max = 20)
     private String name;
-    private String description;
+
+    @NotBlank
+    @Size(max = 20)
     private String category;
+    
+    @Size(max = 350)
+    private String description;
+
     private Long image;
+
     @Column(name="is_available")
     private boolean isAvailable;
+
+    public Tool () { }
+
+    public Tool (String name, String category, String description) {
+        this.name = name;
+        this.category = category;
+        this.description = description;
+
+    }
 
     public int getId() { return id; }
 
