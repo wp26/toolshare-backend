@@ -1,11 +1,10 @@
 package com.toolshare.toolshare.entity;
 
-import org.springframework.hateoas.Link;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
 
 /**
  * @author Luca
@@ -13,13 +12,16 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "tools")
-public class Tool implements Serializable {
+public class Tool {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private Link user_id;
+    @NotNull
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user_id;
 
     @NotBlank
     @Size(max = 20)
@@ -32,29 +34,31 @@ public class Tool implements Serializable {
     @Size(max = 350)
     private String description;
 
-    private Long image;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "image_id", referencedColumnName = "id")
+    private File image;
 
     @Column(name="is_available")
     private boolean isAvailable;
 
     public Tool () { }
 
-    public Tool (String name, String category, String description) {
+    public Tool (String name, String category, String description, User user_id) {
         this.name = name;
         this.category = category;
         this.description = description;
-
+        this.user_id = user_id;
     }
 
     public int getId() { return id; }
 
     public void setId(int id) { this.id = id; }
 
-    public Link getUser_id() {
+    public User getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(Link user_id) { this.user_id = user_id; }
+    public void setUser_id(User user_id) { this.user_id = user_id; }
 
     public String getName() {
         return name;
@@ -80,9 +84,9 @@ public class Tool implements Serializable {
         this.category = category;
     }
 
-    public Long getImage() { return image; }
+    public File getImage() { return image; }
 
-    public void setImage(Long image) { this.image = image; }
+    public void setImage(File image) { this.image = image; }
 
     public boolean isAvailable() {
         return isAvailable;

@@ -1,15 +1,15 @@
 package com.toolshare.toolshare.entity;
 
-/**
- * @author Christopher
- */
-
-import org.springframework.hateoas.Link;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+
+/**
+ * @author Christopher
+ */
+
 
 @Entity
 @Table(name = "ratings")
@@ -18,7 +18,7 @@ public class Rating {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     @NotBlank
     @Size(max = 50)
@@ -61,6 +61,10 @@ public class Rating {
                 '}';
     }
 
+    public Rating() {
+
+    }
+
     public Rating(String title, String text, Integer ratingUp, Integer ratingDown, User user_id, Tool tool_id, Loan loan_id) {
         this.title = title;
         this.text = text;
@@ -71,11 +75,11 @@ public class Rating {
         this.loan_id = loan_id;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
