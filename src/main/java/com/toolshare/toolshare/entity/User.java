@@ -24,6 +24,12 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Size(max = 20)
+	private String name;
+
+	@Size(max = 20)
+	private String surname;
+
 	@NotBlank
 	@Size(max = 20)
 	private String username;
@@ -67,6 +73,22 @@ public class User {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
 	}
 
 	public String getUsername() {
@@ -129,6 +151,8 @@ public class User {
 	public String toString() {
 		return "User{" +
 				", id='" + id + '\'' +
+				", name='" + name + '\'' +
+				", surname='" + surname + '\'' +
 				", username='" + username + '\'' +
 				", email='" + email + '\'' +
 				", birthday=" + birthday + '\'' +

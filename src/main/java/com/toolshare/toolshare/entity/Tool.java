@@ -41,13 +41,19 @@ public class Tool {
     @Column(name="is_available")
     private boolean isAvailable;
 
+    private double latitude;
+
+    private double longitude;
+
     public Tool () { }
 
-    public Tool (String name, String category, String description, User user_id) {
+    public Tool (String name, String category, String description, User user_id, double latitude, double longitude) {
         this.name = name;
         this.category = category;
         this.description = description;
         this.user_id = user_id;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public int getId() { return id; }
@@ -95,5 +101,36 @@ public class Tool {
     public void setAvailable(boolean available) {
         isAvailable = available;
     }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    @Override
+    public String toString() {
+        return "Tool{" +
+                ", id='" + id + '\'' +
+                ", user_id='" + user_id + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", category='" + category + '\'' +
+                ", image='" + image + '\'' +
+                ", isAvailable='" + isAvailable + '\'' +
+                ", latitude='" + latitude + '\'' +
+                ", longitude='" + longitude + '\'' +
+                '}';
+    };
 }
 

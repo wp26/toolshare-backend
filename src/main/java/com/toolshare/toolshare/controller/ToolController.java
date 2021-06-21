@@ -2,9 +2,11 @@ package com.toolshare.toolshare.controller;
 
 
 
+import com.toolshare.toolshare.entity.User;
 import com.toolshare.toolshare.repository.ToolRepository;
 import com.toolshare.toolshare.entity.Tool;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,5 +43,12 @@ public class ToolController {
         catch (IllegalArgumentException exception) {
             return exception.toString();
         }
+    }
+
+    @GetMapping(path="/available")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public @ResponseBody Iterable<Tool> getAvailableTools() {
+        // This returns a JSON or XML with the users
+        return toolRepository.findByIsAvailable(true);
     }
 }
