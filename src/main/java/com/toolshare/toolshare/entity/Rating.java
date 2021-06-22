@@ -40,12 +40,12 @@ public class Rating {
     @NotNull
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "tool_id", referencedColumnName = "id")
-    private Tool tool_id;
+    private Tool tool;
 
     @NotNull
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "loan_id", referencedColumnName = "id")
-    private Loan loan_id;
+    private Loan loan;
 
     @Override
     public String toString() {
@@ -56,8 +56,8 @@ public class Rating {
                 ", ratingUp=" + ratingUp + '\'' +
                 ", ratingDown=" + ratingDown + '\'' +
                 ", user=" + user + '\'' +
-                ", tool_id=" + tool_id + '\'' +
-                ", loan_id=" + loan_id + '\'' +
+                ", tool=" + tool + '\'' +
+                ", loan=" + loan + '\'' +
                 '}';
     }
 
@@ -65,14 +65,14 @@ public class Rating {
 
     }
 
-    public Rating(String title, String text, Integer ratingUp, Integer ratingDown, User user, Tool tool_id, Loan loan_id) {
+    public Rating(String title, String text, Integer ratingUp, Integer ratingDown, User user, Tool tool, Loan loan) {
         this.title = title;
         this.text = text;
         this.ratingUp = ratingUp;
         this.ratingDown = ratingDown;
         this.user = user;
-        this.tool_id = tool_id;
-        this.loan_id = loan_id;
+        this.tool = tool;
+        this.loan = loan;
     }
 
     public Long getId() {
@@ -123,19 +123,19 @@ public class Rating {
         this.user = user;
     }
 
-    public Tool getTool_id() {
-        return tool_id;
+    public Tool getTool() {
+        return tool;
     }
 
-    public void setTool_id(Tool tool_id) {
-        this.tool_id = tool_id;
+    public void setTool(Tool tool) {
+        this.tool = tool;
     }
 
-    public Loan getLoan_id() {
-        return loan_id;
+    public Loan getLoan() {
+        return loan;
     }
 
-    public void setLoan_id(Loan loan_id) {
-        this.loan_id = loan_id;
+    public void setLoan(Loan loan) {
+        this.loan = loan;
     }
 }
