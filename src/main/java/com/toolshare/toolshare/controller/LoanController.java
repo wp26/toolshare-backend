@@ -10,6 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.Optional;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -47,6 +48,35 @@ public class LoanController {
             return exception.toString();
         }
     }
+
+    @PostMapping(path="/delete")
+    public @ResponseBody
+    String deleteLoan (@RequestParam long id) {
+
+        try {
+            loanRepository.deleteById(id);
+            System.out.println("Loan created with id: " + id + " deleted");
+            return "Loan deleted";
+        }
+        catch (IllegalArgumentException exception) {
+            return exception.toString();
+        }
+    }
+
+    @PostMapping(path="/edit")
+    public @ResponseBody
+    String editLoan (@RequestParam long id) {
+
+        try {
+            Optional<Loan> myLoan = loanRepository.findById(id);
+            System.out.println("Loan created with id: " + id + " deleted");
+            return "Loan deleted";
+        }
+        catch (IllegalArgumentException exception) {
+            return exception.toString();
+        }
+    }
+
 
     //
     // GET-REQUESTS

@@ -4,9 +4,12 @@ import com.toolshare.toolshare.entity.User;
 import com.toolshare.toolshare.repository.ToolRepository;
 import com.toolshare.toolshare.entity.Tool;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 /**
  * @author Luca
@@ -51,7 +54,25 @@ public class ToolController {
             return exception.toString();
         }
     }
-    
+
+    @PutMapping(path="/edit")
+    public @ResponseBody String updateTool(@Valid @RequestBody Tool tool) {
+        toolRepository.save(tool);
+        return "Updated";
+    }
+
+    @DeleteMapping(value = "/del")
+    public @ResponseBody String deleteTool(@RequestParam Integer id) {
+
+        try {
+            toolRepository.deleteById(id);
+            return "Entry deleted!";
+        }
+        catch (IllegalArgumentException exception) {
+            return exception.toString();
+        }
+    }
+
 
     @GetMapping(path="/available")
     @PreAuthorize("hasRole('ROLE_USER')")
