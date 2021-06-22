@@ -1,7 +1,5 @@
 package com.toolshare.toolshare.controller;
 
-
-
 import com.toolshare.toolshare.entity.User;
 import com.toolshare.toolshare.repository.ToolRepository;
 import com.toolshare.toolshare.entity.Tool;
@@ -26,14 +24,23 @@ public class ToolController {
 
     @PostMapping(path="/add")
     public @ResponseBody
-    String addNewTool (@RequestParam String name,
+    String addNewTool (@RequestParam User user_id,
+                       @RequestParam String name,
                        @RequestParam String category,
-                       @RequestParam String description) {
+                       @RequestParam String description,
+                       @RequestParam boolean isAvailable,
+                       @RequestParam double latitude,
+                       @RequestParam double longitude
+                       ) {
 
         Tool n = new Tool();
+        n.setUser_id(user_id);
         n.setName(name);
         n.setCategory(category);
         n.setDescription(description);
+        n.setAvailable(isAvailable);
+        n.setLatitude(latitude);
+        n.setLongitude(longitude);
 
         try {
             toolRepository.save(n);
@@ -44,6 +51,7 @@ public class ToolController {
             return exception.toString();
         }
     }
+    
 
     @GetMapping(path="/available")
     @PreAuthorize("hasRole('ROLE_USER')")
