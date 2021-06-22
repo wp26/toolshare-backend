@@ -35,7 +35,7 @@ public class Rating {
     @NotNull
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user_id;
+    private User user;
 
     @NotNull
     @OneToOne(cascade = CascadeType.ALL)
@@ -55,7 +55,7 @@ public class Rating {
                 ", text='" + text + '\'' +
                 ", ratingUp=" + ratingUp + '\'' +
                 ", ratingDown=" + ratingDown + '\'' +
-                ", user_id=" + user_id + '\'' +
+                ", user=" + user + '\'' +
                 ", tool_id=" + tool_id + '\'' +
                 ", loan_id=" + loan_id + '\'' +
                 '}';
@@ -65,12 +65,12 @@ public class Rating {
 
     }
 
-    public Rating(String title, String text, Integer ratingUp, Integer ratingDown, User user_id, Tool tool_id, Loan loan_id) {
+    public Rating(String title, String text, Integer ratingUp, Integer ratingDown, User user, Tool tool_id, Loan loan_id) {
         this.title = title;
         this.text = text;
         this.ratingUp = ratingUp;
         this.ratingDown = ratingDown;
-        this.user_id = user_id;
+        this.user = user;
         this.tool_id = tool_id;
         this.loan_id = loan_id;
     }
@@ -115,12 +115,12 @@ public class Rating {
         this.ratingDown = ratingDown;
     }
 
-    public User getUser_id() {
-        return user_id;
+    public User getUser() {
+        return user;
     }
 
-    public void setUser_id(User user_id) {
-        this.user_id = user_id;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Tool getTool_id() {

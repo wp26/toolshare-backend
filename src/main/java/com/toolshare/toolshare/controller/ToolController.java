@@ -27,7 +27,7 @@ public class ToolController {
 
     @PostMapping(path="/add")
     public @ResponseBody
-    String addNewTool (@RequestParam User user_id,
+    String addNewTool (@RequestParam User user,
                        @RequestParam String name,
                        @RequestParam String category,
                        @RequestParam String description,
@@ -37,7 +37,7 @@ public class ToolController {
                        ) {
 
         Tool n = new Tool();
-        n.setUser_id(user_id);
+        n.setUser(user);
         n.setName(name);
         n.setCategory(category);
         n.setDescription(description);
@@ -57,8 +57,13 @@ public class ToolController {
 
     @PutMapping(path="/edit")
     public @ResponseBody String updateTool(@Valid @RequestBody Tool tool) {
-        toolRepository.save(tool);
-        return "Updated";
+        try {
+            toolRepository.save(tool);
+            return "Updated";
+        }
+        catch (IllegalArgumentException exception) {
+            return exception.toString();
+        }
     }
 
     @DeleteMapping(value = "/del")
@@ -80,4 +85,20 @@ public class ToolController {
         // This returns a JSON or XML with the users
         return toolRepository.findByIsAvailable(true);
     }
+
+    @GetMapping(path="/all")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public @ResponseBody Iterable<Tool> getAllTools() {
+        // This returns a JSON or XML with the users
+        return toolRepository.findAll();
+    }
+
+    @GetMapping(path="/user")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public @ResponseBody Iterable<Tool> getUserTools(@RequestParam User user) {
+        // This returns a JSON or XML with the users
+        return toolRepository.findByUser(user);
+    }
+
+
 }

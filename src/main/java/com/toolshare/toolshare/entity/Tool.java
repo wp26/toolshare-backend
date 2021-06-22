@@ -21,7 +21,7 @@ public class Tool {
     @NotNull
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user_id;
+    private User user;
 
     @NotBlank
     @Size(max = 20)
@@ -47,11 +47,11 @@ public class Tool {
 
     public Tool () { }
 
-    public Tool (String name, String category, String description, User user_id, double latitude, double longitude) {
+    public Tool (String name, String category, String description, User user, double latitude, double longitude) {
         this.name = name;
         this.category = category;
         this.description = description;
-        this.user_id = user_id;
+        this.user = user;
         this.latitude = latitude;
         this.longitude = longitude;
     }
@@ -60,11 +60,11 @@ public class Tool {
 
     public void setId(int id) { this.id = id; }
 
-    public User getUser_id() {
-        return user_id;
+    public User getUser() {
+        return user;
     }
 
-    public void setUser_id(User user_id) { this.user_id = user_id; }
+    public void setUser(User user) { this.user = user; }
 
     public String getName() {
         return name;
@@ -122,7 +122,7 @@ public class Tool {
     public String toString() {
         return "Tool{" +
                 ", id='" + id + '\'' +
-                ", user_id='" + user_id + '\'' +
+                ", user='" + user + '\'' +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", category='" + category + '\'' +

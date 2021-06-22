@@ -1,11 +1,14 @@
 package com.toolshare.toolshare.controller;
 
+import com.toolshare.toolshare.entity.Loan;
 import com.toolshare.toolshare.entity.User;
 import com.toolshare.toolshare.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -25,4 +28,29 @@ public class UserController {
         // This returns a JSON or XML with the users
         return userRepository.findAll();
     }
+
+    @PutMapping(path="/edit")
+    public @ResponseBody String updateUser(@Valid @RequestBody User user) {
+        try {
+            userRepository.save(user);
+            return "Updated";
+        }
+        catch (IllegalArgumentException exception) {
+            return exception.toString();
+        }
+    }
+
+    @DeleteMapping(value = "/del")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public @ResponseBody String deleteUser(@RequestParam Long id) {
+
+        try {
+            userRepository.deleteById(id);
+            return "Entry deleted!";
+        }
+        catch (IllegalArgumentException exception) {
+            return exception.toString();
+        }
+    }
+
 }

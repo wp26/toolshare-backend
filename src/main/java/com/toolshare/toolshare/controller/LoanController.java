@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Date;
 import java.util.Optional;
 
@@ -30,14 +31,14 @@ public class LoanController {
                        @RequestParam Date request_date,
                        @RequestParam int loan_days,
                        @RequestParam Tool tool_id,
-                       @RequestParam User user_id) {
+                       @RequestParam User user) {
 
         Loan n = new Loan();
         n.setMessage(message);
-        n.setRequest_date(request_date);
-        n.setLoan_days(loan_days);
-        n.setTool_id(tool_id);
-        n.setUser_id(user_id);
+        n.setRequestDate(request_date);
+        n.setLoanDays(loan_days);
+        n.setTool(tool_id);
+        n.setUser(user);
 
         try {
             loanRepository.save(n);
@@ -49,28 +50,23 @@ public class LoanController {
         }
     }
 
-    @PostMapping(path="/delete")
-    public @ResponseBody
-    String deleteLoan (@RequestParam long id) {
-
+    @PutMapping(path="/edit")
+    public @ResponseBody String updateLoan(@Valid @RequestBody Loan loan) {
         try {
-            loanRepository.deleteById(id);
-            System.out.println("Loan created with id: " + id + " deleted");
-            return "Loan deleted";
+            loanRepository.save(loan);
+            return "Updated";
         }
         catch (IllegalArgumentException exception) {
             return exception.toString();
         }
     }
 
-    @PostMapping(path="/edit")
-    public @ResponseBody
-    String editLoan (@RequestParam long id) {
+    @DeleteMapping(value = "/del")
+    public @ResponseBody String deleteLoan(@RequestParam Long id) {
 
         try {
-            Optional<Loan> myLoan = loanRepository.findById(id);
-            System.out.println("Loan created with id: " + id + " deleted");
-            return "Loan deleted";
+            loanRepository.deleteById(id);
+            return "Entry deleted!";
         }
         catch (IllegalArgumentException exception) {
             return exception.toString();
@@ -86,6 +82,24 @@ public class LoanController {
     public @ResponseBody Iterable<Loan> getAllLoans() {
         // This returns a JSON or XML with the users
         return loanRepository.findAll();
+    }
+
+    @GetMapping(path="/user")
+    public @ResponseBody Iterable<Loan> getAllUserLoans(@RequestParam User user) {
+        // This returns a JSON or XML with the users
+        return loanRepository.findAllByUser(user);
+    }
+
+    @GetMapping(path="/tool")
+    public @ResponseBody Iterable<Loan> getAllToolLoans(@RequestParam Tool tool) {
+        // This returns a JSON or XML with the users
+        return loanRepository.findByTool(tool);
+    }
+
+    @GetMapping(path="/user/accepted")
+    public @ResponseBody Iterable<Loan> getAllToolLoans(@RequestParam User user, @RequestParam boolean accepted) {
+        // This returns a JSON or XML with the users
+        return loanRepository.findAllByUserAndRequestAccepted(user, accepted);
     }
 
 }

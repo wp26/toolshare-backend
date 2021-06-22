@@ -21,41 +21,41 @@ public class Loan {
 
     @NotNull
     @DateTimeFormat(pattern = "dd/mm/yyyy")
-    private Date request_date;
+    private Date requestDate;
 
-    private boolean request_accepted;
-
-    @DateTimeFormat(pattern = "dd/mm/yyyy")
-    private Date accepted_date;
+    private boolean requestAccepted;
 
     @DateTimeFormat(pattern = "dd/mm/yyyy")
-    private Date returned_date;
+    private Date acceptedDate;
+
+    @DateTimeFormat(pattern = "dd/mm/yyyy")
+    private Date returnedDate;
 
     @NotNull
-    private int loan_days;
+    private int loanDays;
 
     @NotNull
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "tool_id", referencedColumnName = "id")
-    private Tool tool_id;
+    private Tool tool;
 
     @NotNull
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user_id;
+    private User user;
 
     @Override
     public String toString() {
         return "Loan{" +
                 ", id='" + id + '\'' +
                 ", message='" + message + '\'' +
-                ", request_date='" + request_date + '\'' +
-                ", request_accepted=" + request_accepted + '\'' +
-                ", accepted_date=" + accepted_date + '\'' +
-                ", returned_date=" + returned_date + '\'' +
-                ", loan_days=" + loan_days + '\'' +
-                ", tool_id=" + tool_id + '\'' +
-                ", user_id=" + user_id + '\'' +
+                ", requestDate='" + requestDate + '\'' +
+                ", requestAccepted=" + requestAccepted + '\'' +
+                ", acceptedDate=" + acceptedDate + '\'' +
+                ", returnedDate=" + returnedDate + '\'' +
+                ", loanDays=" + loanDays + '\'' +
+                ", tool=" + tool + '\'' +
+                ", user=" + user + '\'' +
                 '}';
     }
 
@@ -63,12 +63,12 @@ public class Loan {
 
     }
 
-    public Loan(String message, Date request_date, int loan_days, Tool tool_id, User user_id) {
+    public Loan(String message, Date requestDate, int loanDays, Tool tool, User user) {
         this.message = message;
-        this.request_date = request_date;
-        this.loan_days = loan_days;
-        this.tool_id = tool_id;
-        this.user_id = user_id;
+        this.requestDate = requestDate;
+        this.loanDays = loanDays;
+        this.tool = tool;
+        this.user = user;
     }
 
     public Long getId() {
@@ -87,59 +87,60 @@ public class Loan {
         this.message = message;
     }
 
-    public Date getRequest_date() {
-        return request_date;
+    public Date getRequestDate() {
+        return requestDate;
     }
 
-    public void setRequest_date(Date request_date) {
-        this.request_date = request_date;
+    public void setRequestDate(Date requestDate) {
+        this.requestDate = requestDate;
     }
 
-    public boolean isRequest_accepted() {
-        return request_accepted;
+    public boolean isRequestAccepted() {
+        return requestAccepted;
     }
 
-    public void setRequest_accepted(boolean request_accepted) {
-        this.request_accepted = request_accepted;
+    public void setRequestAccepted(boolean requestAccepted) {
+        this.requestAccepted = requestAccepted;
     }
 
-    public Date getAccepted_date() {
-        return accepted_date;
-    }
-    public void setAccepted_date(Date accepted_date) {
-        this.accepted_date = accepted_date;
+    public Date getAcceptedDate() {
+        return acceptedDate;
     }
 
-    public Date getReturned_date() {
-        return returned_date;
+    public void setAcceptedDate(Date acceptedDate) {
+        this.acceptedDate = acceptedDate;
     }
 
-    public void setReturned_date(Date returned_date) {
-        this.returned_date = returned_date;
+    public Date getReturnedDate() {
+        return returnedDate;
     }
 
-    public int getLoan_days() {
-        return loan_days;
+    public void setReturnedDate(Date returnedDate) {
+        this.returnedDate = returnedDate;
     }
 
-    public void setLoan_days(int loan_days) {
-        this.loan_days = loan_days;
+    public int getLoanDays() {
+        return loanDays;
     }
 
-    public Tool getTool_id() {
-        return tool_id;
+    public void setLoanDays(int loanDays) {
+        this.loanDays = loanDays;
     }
 
-    public void setTool_id(Tool tool_id) {
-        this.tool_id = tool_id;
+    public Tool getTool() {
+        return tool;
     }
 
-    public User getUser_id() {
-        return user_id;
+    public void setTool(Tool tool) {
+        this.tool = tool;
     }
 
-    public void setUser_id(User user_id) {
-        this.user_id = user_id;
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
 }
