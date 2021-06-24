@@ -61,9 +61,21 @@ public class LoanController {
         }
     }
 
+    @PutMapping(path="/setstatus")
+    public @ResponseBody String setLoanStatus(@RequestParam Long id, @RequestParam String status) {
+        try {
+            Loan loan = loanRepository.getOne(id);
+            loan.setLoanStatus(status);
+            loanRepository.save(loan);
+            return "Updated";
+        }
+        catch (IllegalArgumentException exception) {
+            return exception.toString();
+        }
+    }
+
     @DeleteMapping(value = "/del")
     public @ResponseBody String deleteLoan(@RequestParam Long id) {
-
         try {
             loanRepository.deleteById(id);
             return "Entry deleted!";
@@ -96,10 +108,15 @@ public class LoanController {
         return loanRepository.findByTool(tool);
     }
 
-    @GetMapping(path="/user/accepted")
-    public @ResponseBody Iterable<Loan> getAllToolLoans(@RequestParam User user, @RequestParam boolean accepted) {
+    @GetMapping(path="/user/status")
+    public @ResponseBody Iterable<Loan> getAllToolLoans(@RequestParam User user, @RequestParam String status) {
         // This returns a JSON or XML with the users
-        return loanRepository.findAllByUserAndRequestAccepted(user, accepted);
+        return loanRepository.findAllByUserAndLoanStatus(user, status);
     }
 
+    @GetMapping(path="/user/open")
+    public @ResponseBody Iterable<Loan> getAllToolLoans(@RequestParam User user) {
+        // This returns a JSON or XML with the users
+        return loanRepository.findAllByUserAndLoanStatus(user, "OPEN");
+    }
 }

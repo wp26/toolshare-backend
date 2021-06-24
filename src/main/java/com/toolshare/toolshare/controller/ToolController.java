@@ -68,7 +68,7 @@ public class ToolController {
     }
 
     @PutMapping(path="/setavailable")
-    public @ResponseBody String updateTool(@RequestParam int id, @RequestParam boolean available) {
+    public @ResponseBody String setToolAvailable(@RequestParam int id, @RequestParam boolean available) {
         try {
             Tool tool = toolRepository.getOne(id);
             tool.setAvailable(available);

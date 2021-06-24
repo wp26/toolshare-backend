@@ -23,7 +23,7 @@ public class Loan {
     @DateTimeFormat(pattern = "dd/mm/yyyy")
     private Date requestDate;
 
-    private boolean requestAccepted;
+    private String loanStatus;
 
     @DateTimeFormat(pattern = "dd/mm/yyyy")
     private Date acceptedDate;
@@ -50,7 +50,7 @@ public class Loan {
                 ", id='" + id + '\'' +
                 ", message='" + message + '\'' +
                 ", requestDate='" + requestDate + '\'' +
-                ", requestAccepted=" + requestAccepted + '\'' +
+                ", loanStatus=" + loanStatus + '\'' +
                 ", acceptedDate=" + acceptedDate + '\'' +
                 ", returnedDate=" + returnedDate + '\'' +
                 ", loanDays=" + loanDays + '\'' +
@@ -95,12 +95,12 @@ public class Loan {
         this.requestDate = requestDate;
     }
 
-    public boolean isRequestAccepted() {
-        return requestAccepted;
+    public String getLoanStatus() {
+        return loanStatus;
     }
 
-    public void setRequestAccepted(boolean requestAccepted) {
-        this.requestAccepted = requestAccepted;
+    public void setLoanStatus(String loanStatus) {
+        this.loanStatus = loanStatus;
     }
 
     public Date getAcceptedDate() {

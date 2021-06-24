@@ -11,5 +11,5 @@ import com.toolshare.toolshare.entity.Loan;
 public interface LoanRepository extends JpaRepository<Loan, Long> {
     Iterable<Loan> findAllByUser(User user);
     Iterable<Loan> findByTool(Tool tool);
-    Iterable<Loan> findAllByUserAndRequestAccepted(User user, boolean accepted);
+    Iterable<Loan> findAllByUserAndLoanStatus(User user, String loan_status);
 }
