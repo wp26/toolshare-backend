@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 /**
  * @author Luca
@@ -58,6 +59,19 @@ public class ToolController {
     @PutMapping(path="/edit")
     public @ResponseBody String updateTool(@Valid @RequestBody Tool tool) {
         try {
+            toolRepository.save(tool);
+            return "Updated";
+        }
+        catch (IllegalArgumentException exception) {
+            return exception.toString();
+        }
+    }
+
+    @PutMapping(path="/setavailable")
+    public @ResponseBody String updateTool(@RequestParam int id, @RequestParam boolean available) {
+        try {
+            Tool tool = toolRepository.getOne(id);
+            tool.setAvailable(available);
             toolRepository.save(tool);
             return "Updated";
         }
