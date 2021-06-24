@@ -33,17 +33,17 @@ public class Rating {
     private Integer ratingDown;
 
     @NotNull
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
     @NotNull
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "tool_id", referencedColumnName = "id")
     private Tool tool;
 
     @NotNull
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "loan_id", referencedColumnName = "id")
     private Loan loan;
 

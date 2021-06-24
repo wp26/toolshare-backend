@@ -19,7 +19,7 @@ public class Tool {
     private int id;
 
     @NotNull
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
@@ -34,7 +34,7 @@ public class Tool {
     @Size(max = 350)
     private String description;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "image_id", referencedColumnName = "id")
     private File image;
 
