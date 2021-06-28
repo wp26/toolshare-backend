@@ -29,9 +29,13 @@ public class UserController {
         return userRepository.findAll();
     }
 
-    @PutMapping(path="/edit")
-    public @ResponseBody String updateUser(@Valid @RequestBody User user) {
+    @PutMapping(path="/edit/email")
+    public @ResponseBody String updateUserEmail(@RequestParam Long userID, @RequestParam String email) {
         try {
+
+            User user = userRepository.getOne(userID);
+            user.setEmail(email);
+
             userRepository.save(user);
             return "Updated";
         }
