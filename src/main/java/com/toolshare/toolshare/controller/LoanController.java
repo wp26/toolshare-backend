@@ -107,6 +107,11 @@ public class LoanController {
         // This returns a JSON or XML with the users
         return loanRepository.findByTool(tool);
     }
+    @GetMapping(path="/tool/user")
+    public @ResponseBody Iterable<Loan> getAllToolUser(@RequestParam Long user_id) {
+        // This returns a JSON or XML with the users
+        return loanRepository.findAllByToolUser(user_id);
+    }
 
     @GetMapping(path="/user/status")
     public @ResponseBody Iterable<Loan> getAllToolLoans(@RequestParam User user, @RequestParam String status) {
