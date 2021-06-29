@@ -6,12 +6,10 @@ import com.toolshare.toolshare.entity.Tool;
 import com.toolshare.toolshare.repository.LoanRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Date;
-import java.util.Optional;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -28,15 +26,15 @@ public class LoanController {
     @PostMapping(path="/add")
     public @ResponseBody
     String addNewLoan (@RequestParam String message,
-                       @RequestParam Date request_date,
-                       @RequestParam int loan_days,
+                       @RequestParam Date requestDate,
+                       @RequestParam int loanDays,
                        @RequestParam Tool tool,
                        @RequestParam User user) {
 
         Loan n = new Loan();
         n.setMessage(message);
-        n.setRequestDate(request_date);
-        n.setLoanDays(loan_days);
+        n.setRequestDate(requestDate);
+        n.setLoanDays(loanDays);
         n.setTool(tool);
         n.setUser(user);
 
