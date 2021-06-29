@@ -1,5 +1,6 @@
 package com.toolshare.toolshare.controller;
 
+import com.toolshare.toolshare.entity.File;
 import com.toolshare.toolshare.entity.User;
 import com.toolshare.toolshare.repository.ToolRepository;
 import com.toolshare.toolshare.entity.Tool;
@@ -32,6 +33,7 @@ public class ToolController {
                        @RequestParam String name,
                        @RequestParam String category,
                        @RequestParam String description,
+                       @RequestParam File image,
                        @RequestParam boolean isAvailable,
                        @RequestParam double latitude,
                        @RequestParam double longitude
@@ -42,6 +44,7 @@ public class ToolController {
         n.setName(name);
         n.setCategory(category);
         n.setDescription(description);
+        n.setImage(image);
         n.setAvailable(isAvailable);
         n.setLatitude(latitude);
         n.setLongitude(longitude);
