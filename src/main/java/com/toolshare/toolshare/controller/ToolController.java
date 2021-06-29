@@ -33,7 +33,7 @@ public class ToolController {
                        @RequestParam String name,
                        @RequestParam String category,
                        @RequestParam String description,
-                       @RequestParam File image,
+                       @RequestParam String image,
                        @RequestParam boolean isAvailable,
                        @RequestParam double latitude,
                        @RequestParam double longitude

@@ -1,6 +1,8 @@
 package com.toolshare.toolshare.entity;
 
 
+import net.minidev.json.annotate.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -34,9 +36,7 @@ public class Tool {
     @Size(max = 350)
     private String description;
 
-    @OneToOne
-    @JoinColumn(name = "image_id", referencedColumnName = "id")
-    private File image;
+    private String image;
 
     @Column(name="is_available")
     private boolean isAvailable;
@@ -90,9 +90,9 @@ public class Tool {
         this.category = category;
     }
 
-    public File getImage() { return image; }
+    public String getImage() { return image; }
 
-    public void setImage(File image) { this.image = image; }
+    public void setImage(String image) { this.image = image; }
 
     public boolean isAvailable() {
         return isAvailable;
