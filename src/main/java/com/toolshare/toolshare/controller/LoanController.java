@@ -30,14 +30,14 @@ public class LoanController {
     String addNewLoan (@RequestParam String message,
                        @RequestParam Date request_date,
                        @RequestParam int loan_days,
-                       @RequestParam Tool tool_id,
+                       @RequestParam Tool tool,
                        @RequestParam User user) {
 
         Loan n = new Loan();
         n.setMessage(message);
         n.setRequestDate(request_date);
         n.setLoanDays(loan_days);
-        n.setTool(tool_id);
+        n.setTool(tool);
         n.setUser(user);
 
         try {
