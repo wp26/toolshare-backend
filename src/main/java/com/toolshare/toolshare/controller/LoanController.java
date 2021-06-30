@@ -36,7 +36,7 @@ public class LoanController {
         Loan n = new Loan();
         n.setMessage(message);
         n.setRequestDate(new Date());
-        n.setLoanStatus("OPEN");
+        n.setLoanStatus("open");
         n.setLoanDays(loanDays);
         n.setTool(tool);
         n.setUser(user);
@@ -66,17 +66,15 @@ public class LoanController {
     public @ResponseBody String setLoanStatus(@RequestParam Long id, @RequestParam String status) {
         try {
             Loan loan = loanRepository.getOne(id);
-            if (status.equalsIgnoreCase("ACCEPTED")) {
+            loan.setLoanStatus(status);
+            if (status.equalsIgnoreCase("accepted")) {
                 loan.setAcceptedDate(new Date());
-                loan.setLoanStatus("ACCEPTED");
             }
-            else if (status.equalsIgnoreCase("DENIED")) {
+            else if (status.equalsIgnoreCase("denied")) {
                 loan.setAcceptedDate(new Date());
-                loan.setLoanStatus("DENIED");
             }
-            else if (status.equalsIgnoreCase("CLOSED")) {
+            else if (status.equalsIgnoreCase("closed")) {
                 loan.setReturnedDate(new Date());
-                loan.setLoanStatus("CLOSED");
             }
             loanRepository.save(loan);
             return "Updated";
