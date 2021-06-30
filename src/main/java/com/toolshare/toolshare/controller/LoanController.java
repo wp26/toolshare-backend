@@ -10,11 +10,14 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Date;
+import java.text.SimpleDateFormat;
+
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping(path="/api/loan")
 public class LoanController {
+
 
     @Autowired
     private LoanRepository loanRepository;
@@ -26,14 +29,14 @@ public class LoanController {
     @PostMapping(path="/add")
     public @ResponseBody
     String addNewLoan (@RequestParam String message,
-                       @RequestParam Date requestDate,
                        @RequestParam int loanDays,
                        @RequestParam Tool tool,
                        @RequestParam User user) {
 
         Loan n = new Loan();
         n.setMessage(message);
-        n.setRequestDate(requestDate);
+        n.setRequestDate(new Date());
+        n.setLoanStatus("OPEN");
         n.setLoanDays(loanDays);
         n.setTool(tool);
         n.setUser(user);
@@ -64,6 +67,15 @@ public class LoanController {
         try {
             Loan loan = loanRepository.getOne(id);
             loan.setLoanStatus(status);
+            if (status.equalsIgnoreCase("ACCEPTED")) {
+                loan.setAcceptedDate(new Date());
+            }
+            else if (status.equalsIgnoreCase("DENIED")) {
+                loan.setAcceptedDate(new Date());
+            }
+            else if (status.equalsIgnoreCase("CLOSED")) {
+                loan.setReturnedDate(new Date());
+            }
             loanRepository.save(loan);
             return "Updated";
         }
