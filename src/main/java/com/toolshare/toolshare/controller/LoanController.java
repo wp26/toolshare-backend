@@ -73,7 +73,7 @@ public class LoanController {
             else if (status.equalsIgnoreCase("denied")) {
                 loan.setAcceptedDate(new Date());
             }
-            else if (status.equalsIgnoreCase("closed")) {
+            else if (status.equalsIgnoreCase("returned")) {
                 loan.setReturnedDate(new Date());
             }
             loanRepository.save(loan);
