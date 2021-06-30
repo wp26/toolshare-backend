@@ -1,5 +1,11 @@
 package com.toolshare.toolshare.payload.response;
 
+/**
+ * standard response with message
+ *
+ * @author Paul
+ */
+
 public class MessageResponse {
 	private String message;
 

@@ -27,6 +27,18 @@ public class ToolController {
     // POST-REQUESTS
     //
 
+    /**
+     * Create new Tool
+     * @param user user id of user that owns the tool
+     * @param name name of the tool
+     * @param category category of the tool
+     * @param description description about the tool
+     * @param image image id of selected picture for the tool
+     * @param isAvailable true/false if tool is available for a loan
+     * @param latitude
+     * @param longitude
+     * @return Success message or error exception
+     */
     @PostMapping(path="/add")
     public @ResponseBody
     String addNewTool (@RequestParam User user,
@@ -59,6 +71,11 @@ public class ToolController {
         }
     }
 
+    /**
+     * Edit existing tool
+     * @param tool Tool object with changes
+     * @return Success message or error exception
+     */
     @PutMapping(path="/edit")
     public @ResponseBody String updateTool(@Valid @RequestBody Tool tool) {
         try {
@@ -70,6 +87,12 @@ public class ToolController {
         }
     }
 
+    /**
+     * Set Tool visible and available to other users
+     * @param id tool id to set available
+     * @param available true or false if it should be available
+     * @return Success message or error exception
+     */
     @PutMapping(path="/setavailable")
     public @ResponseBody String setToolAvailable(@RequestParam int id, @RequestParam boolean available) {
         try {
@@ -83,6 +106,11 @@ public class ToolController {
         }
     }
 
+    /**
+     * Delete Tool
+     * @param id tool id to be deleted
+     * @return Success message or error exception
+     */
     @DeleteMapping(value = "/del")
     public @ResponseBody String deleteTool(@RequestParam Integer id) {
 
@@ -95,7 +123,10 @@ public class ToolController {
         }
     }
 
-
+    /**
+     * Get all Tools that are available
+     * @return Array of Tool objects
+     */
     @GetMapping(path="/available")
     @PreAuthorize("hasRole('ROLE_USER')")
     public @ResponseBody Iterable<Tool> getAvailableTools() {
@@ -103,6 +134,10 @@ public class ToolController {
         return toolRepository.findByIsAvailable(true);
     }
 
+    /**
+     * Get all Tools
+     * @return Array of Tool objects
+     */
     @GetMapping(path="/all")
     @PreAuthorize("hasRole('ROLE_USER')")
     public @ResponseBody Iterable<Tool> getAllTools() {
@@ -110,6 +145,11 @@ public class ToolController {
         return toolRepository.findAll();
     }
 
+    /**
+     * Get all Tools of specific user
+     * @param user user id of user to get all tools
+     * @return Array of Tool objects
+     */
     @GetMapping(path="/user")
     @PreAuthorize("hasRole('ROLE_USER')")
     public @ResponseBody Iterable<Tool> getUserTools(@RequestParam User user) {

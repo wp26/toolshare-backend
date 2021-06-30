@@ -3,6 +3,10 @@ package com.toolshare.toolshare.payload.request;
 import java.util.Set;
 
 import javax.validation.constraints.*;
+
+/**
+ * custom request for signup
+ */
  
 public class SignupRequest {
     @NotBlank

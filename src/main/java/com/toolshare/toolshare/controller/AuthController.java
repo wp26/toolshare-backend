@@ -51,6 +51,12 @@ public class AuthController {
 	@Autowired
 	JwtUtils jwtUtils;
 
+
+	/**
+	 * Pass username and password to login.
+	 * @param loginRequest with username und password
+	 * @return JwtToken and user details with roles
+	 */
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -74,6 +80,11 @@ public class AuthController {
 												 roles));
 	}
 
+	/**
+	 *	Register User by passing user object
+	 * @param signUpRequest with name, surname, username, password, email and roles
+	 * @return Success message or error exception
+	 */
 	@PostMapping("/signup")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
 		if (userRepository.existsByUsername(signUpRequest.getUsername())) {

@@ -22,6 +22,10 @@ public class UserController {
     // GET-REQUESTS
     //
 
+    /**
+     * Get all Users
+     * @return Array of User objects
+     */
     @GetMapping(path="/all")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public @ResponseBody Iterable<User> getAllUsers() {
@@ -29,6 +33,12 @@ public class UserController {
         return userRepository.findAll();
     }
 
+    /**
+     * Edit email of user
+     * @param userID user id of user to change email
+     * @param email new email string
+     * @return Success message or error exception
+     */
     @PutMapping(path="/edit/email")
     public @ResponseBody String updateUserEmail(@RequestParam Long userID, @RequestParam String email) {
         try {
@@ -44,6 +54,11 @@ public class UserController {
         }
     }
 
+    /**
+     * Delete user
+     * @param id user id of user to be deleted
+     * @return Success message or error exception
+     */
     @DeleteMapping(value = "/del")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public @ResponseBody String deleteUser(@RequestParam Long id) {

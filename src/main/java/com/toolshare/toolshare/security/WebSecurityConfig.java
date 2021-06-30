@@ -18,6 +18,12 @@ import com.toolshare.toolshare.security.jwt.AuthEntryPointJwt;
 import com.toolshare.toolshare.security.jwt.AuthTokenFilter;
 import com.toolshare.toolshare.security.services.UserDetailsServiceImpl;
 
+/**
+ * This class enables Jwt Authentication for all Requests
+ *
+ * @author Paul
+ */
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
@@ -52,6 +58,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return new BCryptPasswordEncoder();
 	}
 
+	/**
+	 * Configure HttpSecurity and exclude /api/auth/** to sign in and /files/** to show pictures on all platforms.
+	 * @param http http Object of Application
+	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.cors().and().csrf().disable()

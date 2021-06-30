@@ -2,6 +2,12 @@ package com.toolshare.toolshare.payload.request;
 
 import javax.validation.constraints.NotBlank;
 
+/**
+ * custom request for login
+ *
+ * @author Paul
+ */
+
 public class LoginRequest {
 	@NotBlank
 	private String username;

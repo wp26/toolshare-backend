@@ -1,12 +1,16 @@
 package com.toolshare.toolshare.entity;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
 import java.util.Date;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+
+/**
+ * Entity to store loans in DB
+ *
+ * @author
+ */
 
 @Entity
 @Table(	name = "loans")

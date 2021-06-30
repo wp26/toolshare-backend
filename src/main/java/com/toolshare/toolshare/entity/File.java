@@ -5,8 +5,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
-
 import org.hibernate.annotations.GenericGenerator;
+
+/**
+ * Entity to store files in DB with filename, type and data
+ *
+ * @author Paul
+ */
 
 @Entity
 @Table(name = "files")

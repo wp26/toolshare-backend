@@ -2,6 +2,12 @@ package com.toolshare.toolshare.entity;
 
 import javax.persistence.*;
 
+/**
+ * Entity to store files in DB with filename, type and data
+ *
+ * @author
+ */
+
 @Entity
 @Table(name = "roles")
 public class Role {

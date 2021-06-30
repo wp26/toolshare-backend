@@ -1,5 +1,9 @@
 package com.toolshare.toolshare.payload.response;
 
+/**
+ * custom response for File
+ */
+
 public class FileResponse {
     private String name;
     private String url;

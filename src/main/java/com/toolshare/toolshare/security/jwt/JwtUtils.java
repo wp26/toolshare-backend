@@ -11,6 +11,12 @@ import org.springframework.stereotype.Component;
 import com.toolshare.toolshare.security.services.UserDetailsImpl;
 import io.jsonwebtoken.*;
 
+/**
+ * This class generates the Jwt Token and has helper functions to work with it.
+ *
+ * @author Paul
+ */
+
 @Component
 public class JwtUtils {
 	private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
@@ -21,6 +27,11 @@ public class JwtUtils {
 	@Value("${toolshare.app.jwtExpirationMs}")
 	private int jwtExpirationMs;
 
+	/**
+	 * Generate Jwt Token
+	 * @param authentication Authentication object
+	 * @return Jwt Token as a String
+	 */
 	public String generateJwtToken(Authentication authentication) {
 
 		UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
@@ -33,10 +44,21 @@ public class JwtUtils {
 				.compact();
 	}
 
+	/**
+	 * Extract username from Jwt Token
+	 * @param token token to get username from
+	 * @return username string
+	 */
 	public String getUserNameFromJwtToken(String token) {
 		return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
 	}
 
+
+	/**
+	 * validate Jwt Token
+	 * @param authToken token to be validated
+	 * @return true/false if token is valid
+	 */
 	public boolean validateJwtToken(String authToken) {
 		try {
 			Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);

@@ -1,14 +1,13 @@
 package com.toolshare.toolshare.entity;
 
-
-import net.minidev.json.annotate.JsonIgnore;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
+ * Entity to store tools in DB
+ *
  * @author Luca
  */
 

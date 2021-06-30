@@ -7,9 +7,10 @@ import javax.validation.constraints.Size;
 
 
 /**
+ * Entity to store loans in DB
+ *
  * @author Christopher
  */
-
 
 @Entity
 @Table(name = "ratings")

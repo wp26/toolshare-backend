@@ -2,6 +2,12 @@ package com.toolshare.toolshare.payload.response;
 
 import java.util.List;
 
+/**
+ * custom response for JwtToken after logging in
+ *
+ * @author Paul
+ */
+
 public class JwtResponse {
 	private String token;
 	private String type = "Bearer";

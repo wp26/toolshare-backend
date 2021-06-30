@@ -11,6 +11,12 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+/**
+ * Entity to store users in DB
+ *
+ * @author Paul
+ */
+
 @Entity
 @Table(	name = "users", 
 		uniqueConstraints = { 

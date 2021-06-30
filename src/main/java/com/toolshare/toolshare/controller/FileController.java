@@ -28,6 +28,12 @@ public class FileController {
     @Autowired
     private FileStorageService storageService;
 
+
+    /**
+     * Upload files to Database
+     * @param file to upload
+     * @return success message or error exception
+     */
     @PostMapping("/upload")
     public ResponseEntity<MessageResponse> uploadFile(@RequestParam("file") MultipartFile file) {
         String message = "";
@@ -42,6 +48,10 @@ public class FileController {
         }
     }
 
+    /**
+     * Get list of all files
+     * @return File object with direct link to file
+     */
     @GetMapping("/files")
     public ResponseEntity<List<FileResponse>> getListFiles() {
         List<FileResponse> files = storageService.getAllFiles().map(dbFile -> {
@@ -61,6 +71,11 @@ public class FileController {
         return ResponseEntity.status(HttpStatus.OK).body(files);
     }
 
+    /**
+     * Load specific file with id
+     * @param id file id to fetch
+     * @return Bytes of file
+     */
     @GetMapping("/files/{id}")
     public ResponseEntity<byte[]> getFile(@PathVariable String id) {
         File fileDB = storageService.getFile(id);
