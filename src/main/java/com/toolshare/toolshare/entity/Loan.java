@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 /**
  * Entity to store loans in DB
  *
- * @author
+ * @ Paul
  */
 
 @Entity

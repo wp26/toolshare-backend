@@ -11,7 +11,7 @@ import com.toolshare.toolshare.entity.Loan;
 /**
  * Repository for all Files and custom Query's
  *
- * @author
+ * @author Paul
  */
 
 @Repository

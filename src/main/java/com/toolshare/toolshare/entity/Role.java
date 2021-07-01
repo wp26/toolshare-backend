@@ -5,7 +5,7 @@ import javax.persistence.*;
 /**
  * Entity to store files in DB with filename, type and data
  *
- * @author
+ * @author Paul
  */
 
 @Entity

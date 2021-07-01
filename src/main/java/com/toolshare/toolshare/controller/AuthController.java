@@ -32,6 +32,12 @@ import com.toolshare.toolshare.repository.UserRepository;
 import com.toolshare.toolshare.security.jwt.JwtUtils;
 import com.toolshare.toolshare.security.services.UserDetailsImpl;
 
+/**
+ * requests for authentication with JWT
+ *
+ * @author Paul
+ */
+
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
