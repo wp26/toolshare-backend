@@ -10,6 +10,12 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+/**
+ * requets for Entity User
+ *
+ * @author Paul
+ */
+
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping(path="/api/user")
